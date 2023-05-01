@@ -5,15 +5,21 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
  var db =require('./connection/connection')
 
-var userRouter = require('./routes/user');
-var adminRouter = require('./routes/admin');
 
 var fileUpload=require('express-fileupload')
 
 
 var hbs = require('express-handlebars');
 
+db.connect((err)=>{
+  if(err) console.log('connection error'+err);
+  else console.log('database connected');
+})
+
 var app = express();
+
+var userRouter = require('./routes/user');
+var adminRouter = require('./routes/admin');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -21,10 +27,7 @@ app.set('view engine', 'hbs');
 
 
 // view engine setup
-db.connect((err)=>{
-  if(err) console.log('connection error'+err);
-  else console.log('database connected');
-})
+
 
 app.use(fileUpload())
 app.engine('hbs', hbs.engine({
