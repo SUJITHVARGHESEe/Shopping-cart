@@ -5,9 +5,9 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
  var db =require('./connection/connection')
 
-
+const nocache=require('nocache')
 var fileUpload=require('express-fileupload')
-
+var session=require('express-session')
 
 var hbs = require('express-handlebars');
 
@@ -25,9 +25,9 @@ var adminRouter = require('./routes/admin');
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 
-
+app.use(nocache())
 // view engine setup
-
+app.use(session({secret:"Key",cookie:{maxAge:300000}}))
 
 app.use(fileUpload())
 app.engine('hbs', hbs.engine({

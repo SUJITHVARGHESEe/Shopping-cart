@@ -2,15 +2,16 @@
     <div class="container">
         <div class="row mt-5">
  <a href="/admin/add-product" class="btn btn-success ml-auto" >Add Produt</a>
-            <table class="table">
+            <table class="table" id="productsTable">
     <thead>
         <tr>
-            <th scope="col">#</th>
+            <th scope="col">No</th>
             <th scope="col">Title</th>
             <th scope="col">Category</th>
          
             <th scope="col">Price</th>
             <th scope="col">Image</th>
+            <th>option </th>
         </tr>
     </thead>
     <tbody>
@@ -22,10 +23,18 @@
             <td>{{this.price}}</td>
             
             <td><img src="/product-images/{{this._id}}.jpg" style="width:50px;height:50px;" alt=""></td>
+            <td>
+                  <a href="/admin/edit-product/{{this._id}}" class="btn btn-primary">Edit</a>
+                <a href="/admin/delete-product/{{this._id}}" class="btn btn-danger " onclick="return confirm('ARE YOU WANT TO DELETE{{this.name}}?')" >Delete</a></td>
+              
+            </td>
         </tr>
 {{/each}}
 
     </tbody>
+
+
+
 </table>
         </div>
     </div>
